@@ -12,45 +12,58 @@ class Stack {
     this.length = 0;
   }
   peek() {
-    return this.top;
+    return this.top
+    // console.log('peek');
+    // let next = this.top;
+    // while(next) {
+    //     console.log(next.value);
+    //     next = next.next;
+    // }
   }
   push(value){
+    const top = this.top;
     const newNode = new Node(value);
-    if (this.length === 0) {
-      this.top = newNode;
-      this.bottom = newNode;
+    if(top) {
+        newNode.next = top
+        this.top = newNode
     } else {
-      const holdingPointer = this.top;
-      this.top = newNode;
-      this.top.next = holdingPointer;
+        this.top = newNode;
     }
-    this.length++;
+    if(this.length <= 0) this.bottom = this.top;
+    this.length++
     return this;
   }
   pop(){
-    if (!this.top) {
-      return null;
+    let retrn = null
+    if(this.length > 0) {
+        retrn = this.top
+        this.top = this.top.next;
+        if(this.top == null){
+            this.bottom = null
+        }
+        this.length--
     }
-    if (this.top === this.bottom) {
-      this.bottom = null;
-    }
-    const holdingPointer = this.top;
-    this.top = this.top.next;
-    this.length--;
-    return this;
+    return retrn
   }
-  //isEmpty
 }
 
 const myStack = new Stack();
-myStack.peek();
-myStack.push('google');
-myStack.push('udemy');
-myStack.push('discord');
-myStack.peek();
-myStack.pop();
-myStack.pop();
-myStack.pop();
+
+myStack.push(1)
+myStack.push(2)
+myStack.push(3)
+myStack.peek()
+myStack.pop()
+myStack.peek()
+myStack.pop()
+myStack.pop()
+myStack.peek()
+// myStack.push(1)
+// myStack.push(2)
+// myStack.push(3)
+// myStack.peek()
+
+console.log(myStack)
 
 
 //Discord
